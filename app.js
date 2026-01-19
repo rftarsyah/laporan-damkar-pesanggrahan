@@ -454,19 +454,6 @@ window.addEventListener("load", () => {
   }
 });
 
-function pilihMenu(menu) {
-  document.getElementById("menuAwal").style.display = "none";
-  document.getElementById("formEvakuasi").style.display = "none";
-  document.getElementById("formEdukasi").style.display = "none";
-
-  if (menu === "evakuasi" || menu === "kebakaran") {
-    document.getElementById("formEvakuasi").style.display = "block";
-  }
-
-  if (menu === "edukasi") {
-    document.getElementById("formEdukasi").style.display = "block";
-  }
-}
 
 /* =========================
    ROTASI OTOMATIS 07.30
@@ -672,6 +659,7 @@ Satgas/Katon Grup C Sektor X Pesanggrahan`;
   document.getElementById("personilEdukasi").value =
     "Anggota Piket Grup " + kompi.split(" ")[1];
 });
+
 
 
 
