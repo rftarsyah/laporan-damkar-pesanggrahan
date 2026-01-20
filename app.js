@@ -455,31 +455,6 @@ window.addEventListener("load", () => {
 });
 
 
-/* =========================
-   ROTASI OTOMATIS 07.30
-========================= */
-
-// 1️⃣ BASE ROTASI (WAJIB PALING ATAS)
-const ROTASI_START = new Date(2026, 0, 19, 7, 30, 0);
-
-// 2️⃣ URUTAN KOMPI
-const urutanKompi = ["Kompi A", "Kompi B", "Kompi C"];
-
-// 3️⃣ URUTAN PERWIRA
-const urutanPerwira = [
-  "Poengky Hermingto, S.E.",
-  "Sjukri, S.Sos., M.Si.",
-  "Kusnanto, S.H.",
-  "Ngatiyo, S.E.",
-  "Sarono, S.E.",
-  "H. Wirawan Aries Wibowo, S.E.",
-  "Paryo, S.T., M.M.",
-  "Anwar Kamsari, S.T.",
-  "Ruwanto, S.H.",
-  "H. Imbang Satriana, S.Pd., M.M.",
-  "Mohammad Slamet, S.Ip."
-];
-
 // 4️⃣ BARU FUNGSI
 function getRotasiIndex(tgl) {
   const [y, m, d] = tgl.split("-").map(Number);
@@ -659,7 +634,6 @@ Satgas/Katon Grup C Sektor X Pesanggrahan`;
   document.getElementById("personilEdukasi").value =
     "Anggota Piket Grup " + kompi.split(" ")[1];
 });
-
 
 
 
