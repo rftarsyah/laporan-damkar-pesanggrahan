@@ -49,7 +49,7 @@ function loadPerwiraDropdown(idElemen) {
 const dataPetugas = {
   "Kompi A": ["Kusumahadi/ASN","Mulyadi S/ASN","Arsuddin, S.Ip./ASN","Sigit S/ASN","Yudhi R/ASN","Wiwit S/ASN","Hanan S.S/CPNS","Kevin D.A/CPNS","Riffat A/CPNS","Bambang K/PJLP","Ibnu S/PJLP","Ismu S/PJLP","A. Ardiansyah/PJLP","A. Robbi/PJLP","Yazid NH/PJLP","Billy Y.N/PJLP","M. Abduh/PJLP","M Taufik/PJLP","Raka P/PJLP","Putu W/PJLP","M Aprizal/PJLP","F. Syihab/PJLP"],
   "Kompi B": ["Didi R, S.IP./ASN","Eko S, S.H./ASN","Doni S, S.E./ASN","Andriansyah, S.M./ASN","Aziz N, S.H./ASN","Arip R.H/ASN","Wahyu N/ASN","Adam Suryana/CPNS","Agge N/CPNS","Braja M/CPNS","Adnan S/PJLP","Amri A.R/PJLP","M. Fadli/PJLP","M. Rastu R/PJLP","Sigit R/PJLP","Chaerul B/PJLP","Ivan F/PJLP","M. Sholahudin/PJLP"],
-  "Kompi C": ["Eko Prasetyo, S.H./ASN","Feri Hamdanika, SH/ASN","Muhamad Dikky Purnama/ASN","Ade Fadillah/ASN","Bayu Hario Santoso, S.Kom./ASN","Endang Hidayat/ASN","Agus Suliyanto, SE/ASN","Geza Ravi Rizky Lutviagusta/CPNS","Sultan Mahesa/CPNS","Andi Kurniawan/PJLP","Burhanudin/PJLP","Endang Nurcahya/PJLP","Frido Amirulloh/PJLP","Sahrul Gunawan/PJLP","Sukron Khairil F./PJLP","Andri Juliansyah/PJLP","M. Tegar Maulana G./PJLP","Adhiya Rizqi Amarullah/PJLP","Rohman/PJLP"]
+  "Kompi C": ["Eko Prasetyo, S.H./ASN","Feri Hamdanika, SH/ASN","Muhamad Dikky Purnama/ASN","Ade Fadillah/ASN","Bayu Hario Santoso, S.Kom./ASN","Endang Hidayat/ASN","Agus Suliyanto, SE/ASN","Novie Andri W/ASN","Geza Ravi Rizky Lutviagusta/CPNS","Sultan Mahesa/CPNS","Andi Kurniawan/PJLP","Burhanudin/PJLP","Endang Nurcahya/PJLP","Frido Amirulloh/PJLP","Sahrul Gunawan/PJLP","Sukron Khairil F./PJLP","Andri Juliansyah/PJLP","M. Tegar Maulana G./PJLP","Adhiya Rizqi Amarullah/PJLP","Rohman/PJLP","Faiz Eka A/PJLP","Tauchid M/PJLP"]
 };
 
 /* =========================
@@ -138,4 +138,5 @@ function copyText(idElemen) {
     document.execCommand("copy");
     alert("Laporan berhasil disalin!");
   }
+
 }
