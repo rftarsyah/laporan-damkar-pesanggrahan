@@ -10,6 +10,7 @@ const urutanKompi = ["Kompi A", "Kompi B", "Kompi C"];
     DATABASE PERWIRA (15 Orang)
 ========================= */
 const urutanPerwira = [
+   { nama: "Sutaka, S.E., M.M.", jabatan: "PLT Kasie Sektor I Tebet" },//index 0
   { nama: "Ngatiyo, S.E.", jabatan: "Kasie Sektor II Setiabudi" }, // Index 0
   { nama: "Sarono, S.E.", jabatan: "Kasie Sektor III Mampang Prapatan" },
   { nama: "H. Wirawan Aries Wibowo, S.E.", jabatan: "Kasie Sektor IV Pasar Minggu" },
@@ -18,8 +19,7 @@ const urutanPerwira = [
   { nama: "Ruwanto, S.H.", jabatan: "Kasie Sektor VII Kebayoran Baru" },
   { nama: "H. Imbang Satriana, S.Pd., M.M.", jabatan: "Kasie Sektor VIII Pancoran" },
   { nama: "Mohammad Slamet, S.Ip.", jabatan: "Kasie Sektor IX Jagakarsa" },
-  { nama: "Poengky Hermingto, S.E.", jabatan: "Kasie Sektor X Pesanggrahan" },
-  { nama: "Sutaka, S.E., M.M.", jabatan: "PLT Kasie Sektor I Tebet" }, // Index 9 (Tepat untuk 9 Feb)
+  { nama: "Poengky Hermingto, S.E.", jabatan: "Kasie Sektor X Pesanggrahan" },// Index 9 (Tepat untuk 9 Feb)
 
   // 5 Perwira Tambahan (Hanya muncul di pilihan manual)
   { nama: "H. Asril Rizal, S.Sos.", jabatan: "Kasudin Jakarta Selatan" },
