@@ -19,7 +19,7 @@ const urutanPerwira = [
   { nama: "H. Imbang Satriana, S.Pd., M.M.", jabatan: "Kasie Sektor VIII Pancoran" },
   { nama: "Mohammad Slamet, S.Ip.", jabatan: "Kasie Sektor IX Jagakarsa" },
   { nama: "Poengky Hermingto, S.E.", jabatan: "Kasie Sektor X Pesanggrahan" },
-  { nama: "Kusnanto, S.H.", jabatan: "Kasie Sektor I Tebet" }, // Index 9 (Tepat untuk 9 Feb)
+  { nama: "Sutaka, S.E., M.M.", jabatan: "PLT Kasie Sektor I Tebet" }, // Index 9 (Tepat untuk 9 Feb)
 
   // 5 Perwira Tambahan (Hanya muncul di pilihan manual)
   { nama: "H. Asril Rizal, S.Sos.", jabatan: "Kasudin Jakarta Selatan" },
