@@ -148,55 +148,139 @@ document.getElementById("tanggal").addEventListener("change", function() {
 });
 
 // 3. Generate Laporan
-function generateLaporan() {
-    let petugas = [];
-    document.querySelectorAll(".petugas-item:checked").forEach((p, i) => { 
-        petugas.push(`${i + 1}. ${p.value}`); 
-    });
-    
+// GANTI TEKS DI BAWAH INI DENGAN URL API YANG KAMU DAPATKAN
+const URL_API_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzz7H7MrjR_3D4EVEdPcy47Cd0bAzq4XWM1GBhzbOsdtbpPJ6xoBPc31VILUqTK-XuC/exec";
+
+async function kirimLaporanEvakuasi() {
     const tgl = document.getElementById("tanggal").value;
-    const perwiraVal = document.getElementById("perwira").value;
-    const kompiVal = document.getElementById("kompi").value;
+    if (!tgl) return alert("Pilih Tanggal terlebih dahulu!");
 
-    document.getElementById("output").value = `
-*SUDIN PENANGGULANGAN KEBAKARAN DAN PENYELAMATAN JAKARTA SELATAN*
+    // 1. Tampilkan status loading & nonaktifkan tombol
+    const statusText = document.getElementById("statusEvakuasi");
+    const btnSubmit = document.getElementById("btnKirimEvakuasi");
+    statusText.style.display = "block";
+    btnSubmit.disabled = true;
+    btnSubmit.style.background = "#ccc";
 
-*Evakuasi ${document.getElementById("evakuasiInput").value}*${emojiEvakuasi(document.getElementById("evakuasiInput").value)}
-Hari/Tgl : ${getHari(tgl)}
+    try {
+        // 2. Ambil & Proses File Media
+        const fileInput = document.getElementById("mediaEvakuasi");
+        let fileMediaArray = [];
+        if (fileInput.files.length > 0) {
+            for (let i = 0; i < fileInput.files.length; i++) {
+                let fileBase64 = await bacaFileSebagaiBase64(fileInput.files[i]);
+                fileMediaArray.push(fileBase64);
+            }
+        }
 
-*Kompi Jaga* : ${kompiVal}
+        // 3. Ambil data Personil Checkbox
+        let petugas = [];
+        document.querySelectorAll("#petugas .petugas-item:checked").forEach((p, i) => { 
+            petugas.push(`${i + 1}. ${p.value}`); 
+        });
 
-*Nama Pelapor* : ${document.getElementById("pelapor").value}
-*No Telepon* : ${document.getElementById("telepon").value}
+        const evakuasiInput = document.getElementById("evakuasiInput").value || "Evakuasi Umum";
+        const kompiVal = document.getElementById("kompi").value;
+        const perwiraVal = document.getElementById("perwira").value;
+        const jumlahPersonil = document.getElementById("jumlahPersonil").value;
+        const unitVal = document.getElementById("unit").value;
+
+        // 4. Siapkan Data JSON untuk API (Variabel disesuaikan dengan kode Apps Script)
+        const payload = {
+            tanggal: tgl,
+            jenisLaporan: document.getElementById("evakuasiInput").value,
+            judulKejadian: evakuasiInput,
+            kompi: kompiVal,
+            pelapor: document.getElementById("pelapor").value,
+            noTelp: document.getElementById("telepon").value,
+            alamat: document.getElementById("alamat").value,
+            perwira: perwiraVal,
+            waktuTerima: document.getElementById("terima").value,
+            waktuMeluncur: document.getElementById("meluncur").value,
+            waktuSelesai: document.getElementById("selesai").value,
+            kronologi: document.getElementById("kronologis").value,
+            tindakan: document.getElementById("tindakan").value,
+            unit: unitVal,
+            personil: (petugas.length > 0 ? petugas.join("\n") : "-"),
+            media: fileMediaArray
+        };
+
+        // 5. Kirim ke Google Apps Script via POST (mode no-cors untuk Google Script)
+        // 5. Kirim ke Google Apps Script via POST (menggunakan mode text/plain untuk bypass CORS)
+        const response = await fetch(URL_API_APPS_SCRIPT, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8", // INI PENTING! Harus text/plain
+            },
+            body: JSON.stringify(payload)
+        });
+
+        // 6. Tangkap URL dari API
+        const responseData = await response.json();
+        
+        if (responseData.status === "success") {
+            // 7. Buat teks laporan WhatsApp dengan URL Drive
+            const laporanWA = generateTeksWhatsAppEvakuasi(payload, petugas, responseData.linkFolder);
+            document.getElementById("output").value = laporanWA;
+            alert("Data berhasil tersimpan ke Spreadsheet & Drive!");
+        } else {
+            alert("Gagal menyimpan data: " + responseData.message);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Terjadi kesalahan saat mengirim data. Cek koneksi internet.");
+    } finally {
+        // 8. Kembalikan tombol seperti semula
+        statusText.style.display = "none";
+        btnSubmit.disabled = false;
+        btnSubmit.style.background = "#e53935";
+    }
+}
+
+// Pisahkan fungsi untuk menyusun teks agar lebih rapi
+function generateTeksWhatsAppEvakuasi(data, daftarPetugas, linkDrive) {
+    return `*SUDIN PENANGGULANGAN KEBAKARAN DAN PENYELAMATAN JAKARTA SELATAN*
+
+*Evakuasi ${data.judulKejadian}*${emojiEvakuasi(data.judulKejadian)}
+Hari/Tgl : ${getHari(data.tanggal)}
+
+*Kompi Jaga* : ${data.kompi}
+
+*Nama Pelapor* : ${data.pelapor}
+*No Telepon* : ${data.noTelp}
 *Alamat*
-${document.getElementById("alamat").value}
+${data.alamat}
 
 *Perwira Piket 401*
-Bpk. ${perwiraVal}
+Bpk. ${data.perwira.split('\n')[0]}
 
 *Penanggung Jawab*
 Bpk. Poengky Hermingto, S.E
 Kasie Sektor X Pesanggrahan
 
 *Koordinator*
-${getKoordinatorByKompi(kompiVal)}
+${getKoordinatorByKompi(data.kompi)}
 
 *Pelaksanaan*
-Terima : ${document.getElementById("terima").value.replace(":", ".")} WIB
-Meluncur : ${document.getElementById("meluncur").value.replace(":", ".")} WIB
-Selesai : ${document.getElementById("selesai").value.replace(":", ".")} WIB
+Terima : ${data.waktuTerima.replace(":", ".")} WIB
+Meluncur : ${data.waktuMeluncur.replace(":", ".")} WIB
+Selesai : ${data.waktuSelesai.replace(":", ".")} WIB
 
 *Pengerahan Personil*
-${document.getElementById("jumlahPersonil").value} Personil dan ${document.getElementById("unit").value}
+${data.unit} (Total: ${data.personil.split('\n')[0]})
 
 *Kronologis*
-${document.getElementById("kronologis").value}
+${data.kronologi}
 
 *Tindakan*
-${document.getElementById("tindakan").value}
+${data.tindakan}
 
 *Petugas*
-${petugas.length > 0 ? petugas.join("\n") : "-"}
+${daftarPetugas.length > 0 ? daftarPetugas.join("\n") : "-"}
+
+*Dokumentasi (Foto/Video)*
+🔗 ${linkDrive}
 
 *Demikian dilaporkan*
 *Terima Kasih*`.trim();
