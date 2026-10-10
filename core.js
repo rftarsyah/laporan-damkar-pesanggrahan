@@ -10,8 +10,6 @@ const urutanKompi = ["Kompi A", "Kompi B", "Kompi C"];
     DATABASE PERWIRA (15 Orang)
 ========================= */
 const urutanPerwira = [
-   { nama: "Sutaka, S.E., M.M.", jabatan: "PLT Kasie Sektor I Tebet" },//index 0
-  { nama: "Ngatiyo, S.E.", jabatan: "Kasie Sektor II Setiabudi" }, // Index 0
   { nama: "Sarono, S.E.", jabatan: "Kasie Sektor III Mampang Prapatan" },
   { nama: "H. Wirawan Aries Wibowo, S.E.", jabatan: "Kasie Sektor IV Pasar Minggu" },
   { nama: "Paryo, S.T., M.M.", jabatan: "Kasie Sektor V Kebayoran Lama" },
@@ -20,6 +18,8 @@ const urutanPerwira = [
   { nama: "H. Imbang Satriana, S.Pd., M.M.", jabatan: "Kasie Sektor VIII Pancoran" },
   { nama: "Mohammad Slamet, S.Ip.", jabatan: "Kasie Sektor IX Jagakarsa" },
   { nama: "Poengky Hermingto, S.E.", jabatan: "Kasie Sektor X Pesanggrahan" },// Index 9 (Tepat untuk 9 Feb)
+  { nama: "Sutaka, S.E., M.M.", jabatan: "PLT Kasie Sektor I Tebet" },//index 0
+  { nama: "Ngatiyo, S.E.", jabatan: "Kasie Sektor II Setiabudi" }, // Index 0
 
   // 5 Perwira Tambahan (Hanya muncul di pilihan manual)
   { nama: "H. Asril Rizal, S.Sos.", jabatan: "Kasudin Jakarta Selatan" },
@@ -139,4 +139,20 @@ function copyText(idElemen) {
     alert("Laporan berhasil disalin!");
   }
 
+}
+
+/* =========================
+   FUNGSI UPLOAD MEDIA (BASE64)
+========================= */
+function bacaFileSebagaiBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve({
+            namaFile: file.name,
+            mimeType: file.type,
+            base64: reader.result.split(',')[1] // Hanya ambil kode base64-nya
+        });
+        reader.onerror = error => reject(error);
+    });
 }
