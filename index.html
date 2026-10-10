@@ -118,7 +118,16 @@
 
         <div id="petugas"></div>
 
-        <button onclick="generateLaporan()">Generate Laporan</button>
+        <!-- Tambahkan kode ini di atas tombol Generate Laporan -->
+        <hr>
+        <h3>Dokumentasi</h3>
+        <label>Upload Foto / Video Kejadian</label>
+        <input type="file" id="mediaEvakuasi" accept="image/*,video/*" multiple>
+        
+        <p id="statusEvakuasi" style="color: #0277bd; font-weight: bold; display: none;">⏳ Sedang mengunggah dan memproses laporan... Mohon tunggu (bisa memakan waktu jika ada video).</p>
+
+        <button onclick="kirimLaporanEvakuasi()" id="btnKirimEvakuasi">Generate & Kirim Laporan</button>
+        <!-- Hapus tombol onclick="generateLaporan()" yang lama -->
         <textarea id="output" rows="15" readonly></textarea>
         <button style="background:#28a745" onclick="copyText('output')">📋 Copy Laporan</button>
         <button style="background:#777" onclick="location.reload()">Kembali</button>
@@ -158,7 +167,19 @@ Kec. Pesanggrahan</textarea>
     <label>Personil</label>
     <textarea id="personilEdukasi"></textarea>
 
-    <button onclick="generateLaporanEdukasi()">Generate Laporan Edukasi</button>
+    <!-- Tambahkan kode ini di atas tombol Generate Laporan -->
+   <!-- Tambahkan kode ini di bagian bawah form Edukasi -->
+    <hr>
+    <h3>Dokumentasi</h3>
+    <label>Upload Foto / Video Kegiatan Edukasi</label>
+    <!-- PERHATIKAN: ID sudah diubah menjadi mediaEdukasi -->
+    <input type="file" id="mediaEdukasi" accept="image/*,video/*" multiple>
+    
+    <p id="statusEdukasi" style="color: #0277bd; font-weight: bold; display: none;">⏳ Sedang mengunggah dan memproses laporan edukasi... Mohon tunggu.</p>
+
+    <!-- Fungsi klik juga sudah diubah -->
+    <button onclick="kirimLaporanEdukasi()" id="btnKirimEdukasi">Generate & Kirim Laporan Edukasi</button>
+    
     <textarea id="outputEdukasi" rows="15" readonly></textarea>
     <button style="background:#28a745" onclick="copyText('outputEdukasi')">📋 Copy Laporan</button>
     <button style="background:#777" onclick="location.reload()">Kembali</button>
@@ -245,7 +266,16 @@ Kec. Pesanggrahan</textarea>
     <h3>Kronologis</h3>
     <textarea id="kronologisKebakaran" rows="7" style="min-height: 100px; line-height: 1.5;"></textarea>
 
-    <button onclick="generateLaporanKebakaran()">Generate Laporan Kebakaran</button>
+    <!-- Tambahkan kode ini di atas tombol Generate Laporan -->
+        <hr>
+        <h3>Dokumentasi</h3>
+        <label>Upload Foto / Video Kejadian</label>
+        <input type="file" id="mediaEvakuasi" accept="image/*,video/*" multiple>
+        
+        <p id="statusEvakuasi" style="color: #0277bd; font-weight: bold; display: none;">⏳ Sedang mengunggah dan memproses laporan... Mohon tunggu (bisa memakan waktu jika ada video).</p>
+
+        <button onclick="kirimLaporanEvakuasi()" id="btnKirimEvakuasi">Generate & Kirim Laporan</button>
+        <!-- Hapus tombol onclick="generateLaporan()" yang lama -->
     <textarea id="outputKebakaran" rows="15" readonly></textarea>
     <button style="background:#28a745" onclick="copyText('outputKebakaran')">📋 Copy Laporan</button>
     <button style="background:#777" onclick="location.reload()">Kembali</button>
